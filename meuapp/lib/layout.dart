@@ -22,6 +22,59 @@ class Layout{
         title: Center(
           child: Text('Lista compras'),
         ),
+        actions: <Widget>[
+          GestureDetector(
+            onTap: (){
+              showDialog(
+                context: context,
+                //barrierDismissible: false,
+                builder: (BuildContext ctx){
+
+                  final input = TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'Nome',
+                      contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5)
+                      )
+                    ),
+                  );
+
+                  return AlertDialog(
+                    title: Text('Nome da lista'),
+                    content: SingleChildScrollView(
+                      child: ListBody(
+                        children: <Widget>[
+                          input
+                        ],
+                      ),
+                    ),
+                    actions: <Widget>[
+                      RaisedButton(
+                        color: secondary(),
+                        child: Text('Cancelar', style: TextStyle(color: light())),
+                        onPressed: (){
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      RaisedButton(
+                        color: primary(),
+                        child: Text('Adicionar', style: TextStyle(color: light())),
+                        onPressed: (){
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    ],
+                  );
+                }
+
+              );
+              print('teste');
+            },
+            child: Icon(Icons.add),
+          ),
+          Padding(padding: EdgeInsets.only(right: 20))
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currItem,
