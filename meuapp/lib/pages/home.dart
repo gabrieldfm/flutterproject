@@ -10,18 +10,15 @@ class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    final content = Center(
-      child: Column(
-        children: <Widget>[
-          Text('Hello'),
-          RaisedButton(
-            child: Text('Sobre'),
-            onPressed: () {
-              Navigator.of(context).pushNamed(AboutPage.tag);
-            },
-          )
-        ],
-      )
+    final content = ListView(
+      shrinkWrap: true,
+      children: <Widget>[
+        ListTile(
+          leading: Icon(Icons.pages),
+          title: Text('First one'),
+          trailing: Icon(Icons.settings_applications),
+        )
+      ],
     );
     
     return Layout.getContent(context, content);

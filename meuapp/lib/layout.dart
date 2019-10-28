@@ -4,6 +4,8 @@ import 'pages/home.dart';
 import 'pages/about.dart';
 import 'pages/settings.dart';
 
+import 'widgets/HomeList.dart';
+
 class Layout {
   static final pages = [HomePage.tag, AboutPage.tag, SettingsPage.tag];
 
@@ -39,6 +41,10 @@ class Layout {
 
   static List<Widget> _getActions(context) {
     List<Widget> items = List<Widget>();
+
+    if(pages[currItem] != HomePage.tag){
+      return items;
+    }
 
     TextEditingController _controller = TextEditingController();
 
@@ -76,7 +82,15 @@ class Layout {
                     color: primary(),
                     child: Text('Adicionar', style: TextStyle(color: light())),
                     onPressed: () {
-                      print(_controller.text);
+
+                      HomeList.items.add(
+                        ListTile(
+                        leading: Icon(Icons.pages),
+                        title: Text(_controller.text),
+                        trailing: Icon(Icons.settings_applications),
+                      ));
+
+                      
                       Navigator.of(context).pop();
                     },
                   )
