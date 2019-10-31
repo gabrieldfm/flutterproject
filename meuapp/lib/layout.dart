@@ -39,7 +39,7 @@ class Layout {
     );
   }
 
-  static List<Widget> _getActions(context) {
+  static List<Widget> _getActions(BuildContext context) {
     List<Widget> items = List<Widget>();
 
     if(pages[currItem] != HomePage.tag){
@@ -87,11 +87,10 @@ class Layout {
                         ListTile(
                         leading: Icon(Icons.pages),
                         title: Text(_controller.text),
-                        trailing: Icon(Icons.settings_applications),
+                        trailing: Icon(Icons.more_vert),
                       ));
-
                       
-                      Navigator.of(context).pop();
+                      Navigator.of(context).popAndPushNamed(HomePage.tag);
                     },
                   )
                 ],
