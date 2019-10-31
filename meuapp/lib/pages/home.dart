@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meuapp/layout.dart';
 
-import 'about.dart';
-
 class HomePage extends StatelessWidget{
 
   static String tag = 'home-page';

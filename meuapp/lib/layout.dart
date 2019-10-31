@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'pages/home.dart';
 import 'pages/about.dart';
 import 'pages/settings.dart';
+import 'pages/list.dart';
 
 import 'widgets/HomeList.dart';
 
@@ -88,6 +89,9 @@ class Layout {
                         leading: Icon(Icons.pages),
                         title: Text(_controller.text),
                         trailing: Icon(Icons.more_vert),
+                        onTap: () {
+                          Navigator.of(context).pushNamed(ListPage.tag);
+                        },
                       ));
                       
                       Navigator.of(context).popAndPushNamed(HomePage.tag);

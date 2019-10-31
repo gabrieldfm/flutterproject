@@ -16,7 +16,7 @@ class _HomeListState extends State<HomeList> {
       values.add(ListTile(
         leading: Icon(Icons.pages),
         title: Text('Nenhuma lista ainda'),
-        trailing: Icon(Icons.more_vert),
+        trailing: Icon(Icons.more_vert)
       ));
     }
 
