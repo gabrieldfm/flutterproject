@@ -12,17 +12,9 @@ class Layout {
 
   static int currItem = 0;
 
-  static Scaffold getContent(BuildContext context, content) {
+  static Scaffold getContent(BuildContext context, content, [bool showbottom = true]) {
     
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Layout.primary(),
-        title: Center(
-          child: Text('Lista compras'),
-        ),
-        actions: _getActions(context),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
+    BottomNavigationBar bottomNavBar = BottomNavigationBar(
         currentIndex: currItem,
         fixedColor: primary(),
         items: <BottomNavigationBarItem>[
@@ -35,7 +27,17 @@ class Layout {
           currItem = i;
           Navigator.of(context).pushNamed(pages[currItem]);
         },
+      );
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Layout.primary(),
+        title: Center(
+          child: Text('Lista compras'),
+        ),
+        actions: _getActions(context),
       ),
+      bottomNavigationBar: showbottom ? bottomNavBar : null,
       body: content,
     );
   }
