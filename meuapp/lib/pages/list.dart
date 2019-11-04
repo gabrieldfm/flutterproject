@@ -21,13 +21,27 @@ class _ListPageState extends State<ListPage> {
             ),
           ),
           Container(
-            color: Colors.blueGrey,
             height: MediaQuery.of(context).size.height - 300,
             child: ListView(
               children: <Widget>[
                 ListTile(
-                  leading: Icon(Icons.adjust),
+                  leading: GestureDetector(
+                    child: Icon(Icons.adjust, color: Colors.green,),
+                    onTap: (){
+                      print('adquirido');
+                    },
+                  ),
                   title: Text('Nome do item'),
+                  subtitle: Text('4 x R\$ 1,50 = R\$ 6,00'),
+                  trailing: GestureDetector(
+                    child: Icon(Icons.delete),
+                    onTap: () {
+                      print('deletar');
+                    },
+                  ),
+                  onLongPress: () {
+                    print('Editar');
+                  },
                 )
               ],
             ),

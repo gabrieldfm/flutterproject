@@ -12,22 +12,26 @@ class Layout {
 
   static int currItem = 0;
 
-  static Scaffold getContent(BuildContext context, content, [bool showbottom = true]) {
-    
+  static Scaffold getContent(BuildContext context, content,
+      [bool showbottom = true]) {
     BottomNavigationBar bottomNavBar = BottomNavigationBar(
-        currentIndex: currItem,
-        fixedColor: primary(),
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
-          BottomNavigationBarItem(icon: Icon(Icons.info), title: Text('Sobre')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), title: Text('Configurações'))
-        ],
-        onTap: (int i) {
-          currItem = i;
-          Navigator.of(context).pushNamed(pages[currItem]);
-        },
-      );
+      currentIndex: currItem,
+      fixedColor: primary(),
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
+        BottomNavigationBarItem(icon: Icon(Icons.info), title: Text('Sobre')),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.settings), title: Text('Configurações'))
+      ],
+      onTap: (int i) {
+        currItem = i;
+        Navigator.of(context).pushNamed(pages[currItem]);
+      },
+    );
+
+    if(!showbottom){
+      currItem = 1;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +49,7 @@ class Layout {
   static List<Widget> _getActions(BuildContext context) {
     List<Widget> items = List<Widget>();
 
-    if(pages[currItem] != HomePage.tag){
+    if (pages[currItem] != HomePage.tag) {
       return items;
     }
 
@@ -85,9 +89,7 @@ class Layout {
                     color: primary(),
                     child: Text('Adicionar', style: TextStyle(color: light())),
                     onPressed: () {
-
-                      HomeList.items.add(
-                        ListTile(
+                      HomeList.items.add(ListTile(
                         leading: Icon(Icons.pages),
                         title: Text(_controller.text),
                         trailing: Icon(Icons.more_vert),
@@ -95,7 +97,7 @@ class Layout {
                           Navigator.of(context).pushNamed(ListPage.tag);
                         },
                       ));
-                      
+
                       Navigator.of(context).popAndPushNamed(HomePage.tag);
                     },
                   )
