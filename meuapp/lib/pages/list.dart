@@ -10,6 +10,15 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
+  List<Widget> itemsList = List<Widget>();
+
+  @override
+  void initState() {
+    _addNewOne();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final content = SingleChildScrollView(
@@ -23,27 +32,20 @@ class _ListPageState extends State<ListPage> {
           Container(
             height: MediaQuery.of(context).size.height - 300,
             child: ListView(
-              children: <Widget>[
-                ListTile(
-                  leading: GestureDetector(
-                    child: Icon(Icons.adjust, color: Colors.green,),
-                    onTap: (){
-                      print('adquirido');
-                    },
-                  ),
-                  title: Text('Nome do item'),
-                  subtitle: Text('4 x R\$ 1,50 = R\$ 6,00'),
-                  trailing: GestureDetector(
-                    child: Icon(Icons.delete),
-                    onTap: () {
-                      print('deletar');
-                    },
-                  ),
-                  onLongPress: () {
-                    print('Editar');
-                  },
-                )
-              ],
+              children: itemsList,
+            ),
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width - 30,
+            child: RaisedButton(
+              color: Layout.primary(),
+              onPressed: () {
+                print('Add item');
+              },
+              child: Text(
+                'Novo item',
+                style: TextStyle(color: Layout.light()),
+              ),
             ),
           ),
           Container(
@@ -52,7 +54,7 @@ class _ListPageState extends State<ListPage> {
             child: Row(
               children: <Widget>[
                 Container(
-                  width: MediaQuery.of(context).size.width /2,
+                  width: MediaQuery.of(context).size.width / 2,
                   padding: EdgeInsets.all(15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,13 +66,16 @@ class _ListPageState extends State<ListPage> {
                 ),
                 Container(
                   color: Colors.indigo,
-                  width: MediaQuery.of(context).size.width /2,
+                  width: MediaQuery.of(context).size.width / 2,
                   padding: EdgeInsets.all(15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text('Total: R\$ 15,00', style: TextStyle(fontSize: 24),),
+                      Text(
+                        'Total: R\$ 15,00',
+                        style: TextStyle(fontSize: 24),
+                      ),
                     ],
                   ),
                 )
@@ -82,5 +87,30 @@ class _ListPageState extends State<ListPage> {
     );
 
     return Layout.getContent(context, content, false);
+  }
+
+  void _addNewOne() {
+    itemsList.add(ListTile(
+      leading: GestureDetector(
+        child: Icon(
+          Icons.adjust,
+          color: Colors.green,
+        ),
+        onTap: () {
+          print('adquirido');
+        },
+      ),
+      title: Text('Nome do item'),
+      subtitle: Text('4 x R\$ 1,50 = R\$ 6,00'),
+      trailing: GestureDetector(
+        child: Icon(Icons.delete),
+        onTap: () {
+          print('deletar');
+        },
+      ),
+      onLongPress: () {
+        print('Editar');
+      },
+    ));
   }
 }
