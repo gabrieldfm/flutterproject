@@ -30,9 +30,13 @@ class _ListPageState extends State<ListPage> {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height - 300,
-            child: ListView(
-              children: itemsList,
+            height: MediaQuery.of(context).size.height - 250,
+            child: ListView.builder(
+
+              itemCount: itemsList.length,
+              itemBuilder: (BuildContext context, int index){
+                return itemsList[index];
+              },
             ),
           ),
           SizedBox(
@@ -40,7 +44,9 @@ class _ListPageState extends State<ListPage> {
             child: RaisedButton(
               color: Layout.primary(),
               onPressed: () {
-                print('Add item');
+                setState(() {
+                  _addNewOne();
+                });
               },
               child: Text(
                 'Novo item',
