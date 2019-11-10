@@ -91,16 +91,29 @@ class Layout {
                     color: primary(),
                     child: Text('Adicionar', style: TextStyle(color: light())),
                     onPressed: () {
-                      HomeList.items.add(ListTile(
-                        leading: Icon(Icons.pages),
-                        title: Text(_controller.text),
-                        trailing: Icon(Icons.more_vert),
-                        onTap: () {
-                          Navigator.of(context).pushNamed(ListPage.tag);
-                        },
-                      ));
 
-                      Navigator.of(context).popAndPushNamed(HomePage.tag);
+                      Lista listaBo = Lista();
+
+                      listaBo.insert({
+                        'name': _controller.text,
+                        'created': DateTime.now().toString()
+
+                      }).then((newRowId){
+
+                        Navigator.of(ctx).pop();
+                        Navigator.of(ctx).pushReplacementNamed(HomePage.tag);
+                      });
+
+                      // HomeList.items.add(ListTile(
+                      //   leading: Icon(Icons.pages),
+                      //   title: Text(_controller.text),
+                      //   trailing: Icon(Icons.more_vert),
+                      //   onTap: () {
+                      //     Navigator.of(context).pushNamed(ListPage.tag);
+                      //   },
+                      // ));
+
+                      // Navigator.of(context).popAndPushNamed(HomePage.tag);
                     },
                   )
                 ],
