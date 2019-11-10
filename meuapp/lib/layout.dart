@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'models/Lista.dart';
 
 import 'pages/home.dart';
 import 'pages/about.dart';
@@ -25,7 +26,7 @@ class Layout {
       ],
       onTap: (int i) {
         currItem = i;
-        Navigator.of(context).pushNamed(pages[currItem]);
+        Navigator.of(context).pushReplacementNamed(pages[i]);
       },
     );
 
@@ -63,6 +64,7 @@ class Layout {
             builder: (BuildContext ctx) {
               final input = TextFormField(
                 controller: _controller,
+                autofocus: true,
                 decoration: InputDecoration(
                     hintText: 'Nome',
                     contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
