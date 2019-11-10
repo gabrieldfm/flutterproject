@@ -40,7 +40,7 @@ abstract class AbstractModel{
 
   Future<List<Map>> list();
 
-  Future<List<Map>> getItem(dynamic where);
+  Future<Map> getItem(dynamic where);
 
   Future<int> insert(Map<String, dynamic> values);
 
