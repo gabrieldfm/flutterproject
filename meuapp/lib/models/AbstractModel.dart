@@ -16,11 +16,28 @@ abstract class AbstractModel{
       String path = databasesPath+dbname;
 
       //delete database
-      await deleteDatabase(path);
+      //await deleteDatabase(path);
+
+      this._db = await openDatabase(
+        path, 
+        version: dbversion,
+        onCreate: (Database db, int version) async{
+          //criação tabelas
+          dbCreate.forEach((String sql) {
+            db.execute(sql);
+          });
+        }
+      );
 
     }
 
     return this._db;
   }
+
+  Future<Database> getDb() async {
+    return await this.init();
+  }
+
+  Future<List<Map>> getItem(dynamic where);
   
 }
