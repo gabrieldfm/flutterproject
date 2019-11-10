@@ -38,6 +38,21 @@ abstract class AbstractModel{
     return await this.init();
   }
 
+  Future<List<Map>> list();
+
   Future<List<Map>> getItem(dynamic where);
+
+  Future<int> insert(Map<String, dynamic> values);
+
+  Future<bool> update(Map<String, dynamic> values, dynamic where);
+
+  Future<bool> delete(dynamic id);
+
+  void close() async{
+    if(this._db != null){
+      await this._db.close();
+      this._db = null;
+    }
+  }
   
 }
