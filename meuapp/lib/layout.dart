@@ -103,17 +103,6 @@ class Layout {
                         Navigator.of(ctx).pop();
                         Navigator.of(ctx).pushReplacementNamed(HomePage.tag);
                       });
-
-                      // HomeList.items.add(ListTile(
-                      //   leading: Icon(Icons.pages),
-                      //   title: Text(_controller.text),
-                      //   trailing: Icon(Icons.more_vert),
-                      //   onTap: () {
-                      //     Navigator.of(context).pushNamed(ListPage.tag);
-                      //   },
-                      // ));
-
-                      // Navigator.of(context).popAndPushNamed(HomePage.tag);
                     },
                   )
                 ],
