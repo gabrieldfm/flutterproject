@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:meuapp/models/Lista.dart';
 import 'package:intl/intl.dart';
 
+enum ListAction{
+  edit,
+  delete
+}
+
 class HomeList extends StatefulWidget {
   final List<Map> items;
 
@@ -39,12 +44,13 @@ class _HomeListState extends State<HomeList> {
       itemBuilder: (BuildContext context, int index) {
         Map item = widget.items[index];
 
-        //DateTime created = DateTIme.tryParse(item['created']);
+        DateTime created = DateTime(item['created']);
 
         return ListTile(
           leading: Icon(Icons.pages),
           title: Text(item['name']),
-          subtitle: Text(item['created']),
+          subtitle: Text(df.format(created)),
+          trailing: PopupMenuButton<ListAction>(),
         );
       },
     );
