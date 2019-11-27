@@ -4,9 +4,6 @@ import 'models/Lista.dart';
 import 'pages/home.dart';
 import 'pages/about.dart';
 import 'pages/settings.dart';
-import 'pages/list.dart';
-
-import 'widgets/HomeList.dart';
 
 class Layout {
   static final pages = [HomePage.tag, AboutPage.tag, SettingsPage.tag];
@@ -30,17 +27,11 @@ class Layout {
       },
     );
 
-    if(!showbottom){
-      currItem = 1;
-    }
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Layout.primary(),
-        title: Center(
-          child: Text('Lista compras'),
-        ),
-        actions: _getActions(context),
+        title: Text('Lista compras'),
+        actions: showbottom ? _getActions(context) : [],
       ),
       bottomNavigationBar: showbottom ? bottomNavBar : null,
       body: content,
@@ -50,67 +41,63 @@ class Layout {
   static List<Widget> _getActions(BuildContext context) {
     List<Widget> items = List<Widget>();
 
-    if (pages[currItem] != HomePage.tag) {
-      return items;
-    }
-
     TextEditingController _controller = TextEditingController();
 
-    items.add(GestureDetector(
-      onTap: () {
-        showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext ctx) {
-              final input = TextFormField(
-                controller: _controller,
-                autofocus: true,
-                decoration: InputDecoration(
-                    hintText: 'Nome',
-                    contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5))),
-              );
+    if (pages[currItem] == HomePage.tag) {
+      items.add(GestureDetector(
+        onTap: () {
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext ctx) {
+                final input = TextFormField(
+                  controller: _controller,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                      hintText: 'Nome',
+                      contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5))),
+                );
 
-              return AlertDialog(
-                title: Text('Nome da lista'),
-                content: SingleChildScrollView(
-                  child: ListBody(
-                    children: <Widget>[input],
+                return AlertDialog(
+                  title: Text('Nome da lista'),
+                  content: SingleChildScrollView(
+                    child: ListBody(
+                      children: <Widget>[input],
+                    ),
                   ),
-                ),
-                actions: <Widget>[
-                  RaisedButton(
-                    color: secondary(),
-                    child: Text('Cancelar', style: TextStyle(color: light())),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  RaisedButton(
-                    color: primary(),
-                    child: Text('Adicionar', style: TextStyle(color: light())),
-                    onPressed: () {
+                  actions: <Widget>[
+                    RaisedButton(
+                      color: secondary(),
+                      child: Text('Cancelar', style: TextStyle(color: light())),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    RaisedButton(
+                      color: primary(),
+                      child:
+                          Text('Adicionar', style: TextStyle(color: light())),
+                      onPressed: () {
+                        Lista listaBo = Lista();
 
-                      Lista listaBo = Lista();
-
-                      listaBo.insert({
-                        'name': _controller.text,
-                        'created': DateTime.now().toString()
-
-                      }).then((newRowId){
-
-                        Navigator.of(ctx).pop();
-                        Navigator.of(ctx).pushReplacementNamed(HomePage.tag);
-                      });
-                    },
-                  )
-                ],
-              );
-            });
-      },
-      child: Icon(Icons.add),
-    ));
+                        listaBo.insert({
+                          'name': _controller.text,
+                          'created': DateTime.now().toString()
+                        }).then((newRowId) {
+                          Navigator.of(ctx).pop();
+                          Navigator.of(ctx).pushReplacementNamed(HomePage.tag);
+                        });
+                      },
+                    )
+                  ],
+                );
+              });
+        },
+        child: Icon(Icons.add),
+      ));
+    }
 
     items.add(Padding(padding: EdgeInsets.only(right: 20)));
 
@@ -129,9 +116,9 @@ class Layout {
   static Color danger([double opacity = 1]) =>
       Color.fromRGBO(217, 74, 74, opacity);
   static Color success([double opacity = 1]) =>
-      Color.fromRGBO(6, 166, 59, opacity);
+      Color.fromRGBO(5, 100, 50, opacity);
   static Color info([double opacity = 1]) =>
-      Color.fromRGBO(0, 122, 166, opacity);
+      Color.fromRGBO(100, 150, 255, opacity);
   static Color warning([double opacity = 1]) =>
       Color.fromRGBO(166, 134, 0, opacity);
 }
