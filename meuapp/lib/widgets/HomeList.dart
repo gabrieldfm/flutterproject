@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meuapp/models/Lista.dart';
 import 'package:intl/intl.dart';
+import 'package:meuapp/pages/home.dart';
 
 enum ListAction{
   edit,
@@ -50,7 +51,39 @@ class _HomeListState extends State<HomeList> {
           leading: Icon(Icons.pages),
           title: Text(item['name']),
           subtitle: Text(df.format(created)),
-          trailing: PopupMenuButton<ListAction>(),
+          trailing: PopupMenuButton<ListAction>(
+            onSelected: (ListAction result) {
+              switch(result){
+                case ListAction.edit:
+                break;
+                case ListAction.delete:
+                  listaBo.delete(item['pk_lista']).then((deleted) {
+                    if(deleted){
+                      Navigator.of(context).pushReplacementNamed(HomePage.tag);
+                    }
+                  });
+                break;
+              }
+            },
+            itemBuilder: (BuildContext context){
+              return <PopupMenuEntry<ListAction>>[
+                PopupMenuItem<ListAction>(
+                  value: ListAction.edit,
+                  child: Row(children: <Widget>[
+                    Icon(Icons.edit),
+                    Text("Editar")
+                  ],),
+                ),
+                PopupMenuItem<ListAction>(
+                  value: ListAction.delete,
+                  child: Row(children: <Widget>[
+                    Icon(Icons.edit),
+                    Text("Excluir")
+                  ],),
+                )
+              ];
+            },
+          ),
         );
       },
     );
